@@ -62,26 +62,27 @@ class Timer {
     }, 1000);
   }
 
-function convertMs(timeLeft) {
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
+  convertMs(timeLeft) {
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
 
-  const days = addLeadingZero(Math.floor(timeLeft / day));
-  const hours = addLeadingZero(Math.floor((timeLeft % day) / hour));
-  const minutes = addLeadingZero(
-    Math.floor(((timeLeft % day) % hour) / minute)
-  );
-  const seconds = addLeadingZero(
-    Math.floor((((timeLeft % day) % hour) % minute) / second)
-  );
+    const days = this.addLeadingZero(Math.floor(timeLeft / day));
+    const hours = this.addLeadingZero(Math.floor((timeLeft % day) / hour));
+    const minutes = this.addLeadingZero(
+      Math.floor(((timeLeft % day) % hour) / minute)
+    );
+    const seconds = this.addLeadingZero(
+      Math.floor((((timeLeft % day) % hour) % minute) / second)
+    );
 
-  return { days, hours, minutes, seconds };
-}
+    return { days, hours, minutes, seconds };
+  }
 
-function addLeadingZero(value) {
-  return String(value).padStart(2, '0');
+  addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+  }
 }
 
 function updateTimerInterface({ days, hours, minutes, seconds }) {
