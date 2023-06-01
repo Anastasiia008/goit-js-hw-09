@@ -43,23 +43,24 @@ const options = {
 
 flatpickr(refs.dateInput, options);
 
-function Timer({ onTick, targetDate }) {
-  this.intervalId = null;
-  this.onTick = onTick;
-  this.targetDate = targetDate;
-}
+class Timer {
+  constructor({ onTick, targetDate }) {
+    this.intervalId = null;
+    this.onTick = onTick;
+    this.targetDate = targetDate;
+  }
 
-Timer.prototype.start = function () {
-  this.intervalId = setInterval(() => {
-    const timeLeft = this.targetDate.getTime() - Date.now();
-    if (timeLeft <= 0) {
-      clearInterval(this.intervalId);
-      return;
-    }
-    const timeLeftConverted = convertMs(timeLeft);
-    this.onTick(timeLeftConverted);
-  }, 1000);
-};
+  start() {
+    this.intervalId = setInterval(() => {
+      const timeLeft = this.targetDate.getTime() - Date.now();
+      if (timeLeft <= 0) {
+        clearInterval(this.intervalId);
+        return;
+      }
+      const timeLeftConverted = this.convertMs(timeLeft);
+      this.onTick(timeLeftConverted);
+    }, 1000);
+  }
 
 function convertMs(timeLeft) {
   const second = 1000;
